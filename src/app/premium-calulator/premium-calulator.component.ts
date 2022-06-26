@@ -10,6 +10,7 @@ import { SharedService } from '../shared.service';
 export class PremiumCalulatorComponent implements OnInit {
   premium:FormGroup
   premiumAmount:any;
+  date:any;
   
   OccupationList:any[];
   RatingList:any[];
@@ -26,6 +27,8 @@ export class PremiumCalulatorComponent implements OnInit {
       'occupation':new FormControl('',Validators.required)
     })
     this.refreshData();
+
+    this.date= new Date(new Date().setFullYear(new Date().getFullYear()-1));
   }
 
   refreshData(){
@@ -39,9 +42,24 @@ export class PremiumCalulatorComponent implements OnInit {
   }
 
  
-
+  DobChange(){
+    var diff =(new Date().getTime() - new Date(this.premium.value.dob).getTime()) / 1000;
+   diff /= (60 * 60 * 24);
+    var age = Math.abs(Math.round(diff/365.25))
+    this.premium.patchValue({
+      age:age
+    })
+  }
   onSubmit(){
-    this.premiumAmount=20000;
+    this.calculatePremium();
+  }
+
+  onOccupationChange(){
+    if(this.premium.valid && this.premiumAmount!=undefined)
+    this.calculatePremium()
+  }
+
+  calculatePremium(){
     var occupation = this.OccupationList.find(m=>m.id==this.premium.value.occupation);
     var rating = this.RatingList.find(m=>m.id==occupation.ratingId);
     this.premiumAmount = (this.premium.value.sumAssured*rating.factor * this.premium.value.age)/1000*12

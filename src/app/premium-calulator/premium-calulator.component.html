@@ -1,41 +1,41 @@
 <form [formGroup]="premium" class="needs-validation" novalidate>
     <div class="row g-3">
-        <div class="col-md-6">
+        <div class="col-md-6 col-padding">
             <div class="col-md-8">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" formControlName="name" value="Mark" required>
             </div>
             
-            <div class="col-md-8">
+            <div class="col-md-8 col-padding">
                 <label class="form-label">Date of Birth</label>
                 <input class="form-control" (change)="DobChange()" type="date" formControlName="dob" placeholder="yyyy-mm-dd"
                     name="dp" max="{{date | date:'yyyy-MM-dd'}}">
                 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-padding">
                 <label class="form-label">Age</label>
                 <input type="number" class="form-control" disabled min="1" max="120" formControlName="age" value="Otto" required>
                 
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-padding">
                 <label class="form-label">Occupation</label>
-                <select class="form-select" formControlName="occupation" required (change)="onOccupationChange()">
+                <select class="form-select form-control" formControlName="occupation" required (change)="onOccupationChange()">
                 
                 <option *ngFor="let occu of OccupationList" value="{{occu.id}}">{{occu.name}}</option>
                 </select>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-padding">
                 <label class="form-label">Sum Assured</label>
                 <input type="text" class="form-control" formControlName="sumAssured" value="Otto" required>
             </div>
         </div>
     
-        <div class="col-md-6">
+        <div class="col-md-6 col-padding">
         <h2>Premium:- </h2>
         <h4>{{premiumAmount}}</h4>
         </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 col-padding">
       <button class="btn btn-primary" type="submit" [disabled]="!premium.valid" (click)="onSubmit()">Calculate Premium</button>
     </div>
   </form>

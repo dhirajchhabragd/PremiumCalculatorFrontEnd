@@ -1,0 +1,53 @@
+<form [formGroup]="premium" class="needs-validation" novalidate>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="col-md-8">
+                <label for="validationCustom01" class="form-label">Name</label>
+                <input type="text" class="form-control" formControlName="name" id="validationCustom01" value="Mark" required>
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+            <div class="col-md-8">
+                <label for="validationCustom02" class="form-label">Age</label>
+                <input type="number" class="form-control" id="validationCustom02" min="1" max="120" formControlName="age" value="Otto" required>
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+            <div class="col-md-8">
+                <label for="validationCustomUsername"  class="form-label">Date of Birth</label>
+                <input class="form-control" type="date" formControlName="dob" placeholder="yyyy-mm-dd"
+                    name="dp">
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+            <div class="col-md-8">
+                <label for="validationCustom04" class="form-label">Occupation</label>
+                <select class="form-select" id="validationCustom04" formControlName="occupation" required>
+                
+                <option *ngFor="let occu of OccupationList" value="{{occu.id}}">{{occu.name}}</option>
+                </select>
+                <div class="invalid-feedback">
+                Please select a valid state.
+                </div>
+            </div>
+            <div class="col-md-8">
+                <label for="validationCustom02" class="form-label">Sum Assured</label>
+                <input type="text" class="form-control" id="validationCustom05" formControlName="sumAssured" value="Otto" required>
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-6">
+        <h2>Premium:- </h2>
+        <h4>{{premiumAmount}}</h4>
+        </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" [disabled]="!premium.valid" (click)="onSubmit()">Calculate Premium</button>
+    </div>
+  </form>
